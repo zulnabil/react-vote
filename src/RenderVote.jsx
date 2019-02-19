@@ -9,7 +9,7 @@ class RenderVote extends React.Component {
             <div>
                 {paslon.map((paslon,index) => {
                     return (
-                        <div>
+                        <div key={index}>
                             {paslon.presiden} & {paslon.wapres}
                             <PercentVote progress={paslon.vote / 200 * 100}/>
                             <br/>

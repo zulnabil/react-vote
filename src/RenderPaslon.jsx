@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Container, Row, Col } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Container, Row, Col } from 'reactstrap';
 
 export default class RenderPaslon extends React.Component {
     render() {
@@ -10,7 +10,7 @@ export default class RenderPaslon extends React.Component {
                     <Row>
                         {paslon.map((paslon,index) => {
                             return (
-                                <Col xs="4" className="grid-paslon">
+                                <Col key={index} xs="4" className="grid-paslon">
                                     <Card>
                                     <CardImg top width="100%" src={paslon.img} alt="Card image cap" />
                                     <CardBody>
