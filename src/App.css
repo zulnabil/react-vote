@@ -23,6 +23,10 @@
   color: white;
 }
 
+.FormVote {
+  background-color: #282c34;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -34,4 +38,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.grid-paslon {
+  margin-top : 30px;
+  margin-bottom: 30px;
+  color: rgb(54, 54, 54);
 }
