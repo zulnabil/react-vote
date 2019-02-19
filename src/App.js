@@ -33,8 +33,6 @@ class App extends Component {
           percent: 0
         },
       ],
-      // percentJokowi: 0,
-      // percentPrabowo: 0,
       jumlahsuara: 200,
       collapse: false,
       showCollapse: 'flex',
@@ -54,17 +52,15 @@ class App extends Component {
   }
 
   votePaslon(paslon) {
-    //console.log(this.state.paslon[paslon.target.id].vote)
     if (this.state.paslon[paslon.target.id].percent < 100 && this.state.jumlahsuara)  {
         let indexpaslon = paslon.target.id;
-        this.state.paslon[indexpaslon].vote += 1;
-        this.state.paslon[indexpaslon].percent = this.state.paslon[indexpaslon].vote / 200 * 100;
-        this.state.jumlahsuara -= 1;
-        this.forceUpdate(); 
-        // this.setState({
-        //   paslon: update(this.state.paslon, {{indexpaslon}: {vote: {$set: this.state.paslon[paslon.target.id].vote+1}}})
-        //     //vote: this.state.paslon[paslon.target.id].vote + 1;
-        //   })
+        const newPaslon = this.state.paslon.slice();
+        newPaslon[indexpaslon].vote += 1;
+        newPaslon[indexpaslon].percent = newPaslon[indexpaslon].vote / 200 * 100;
+        this.setState({
+          paslon: newPaslon,
+          jumlahsuara: this.state.jumlahsuara - 1
+        })
       }
   }
   
@@ -74,23 +70,6 @@ class App extends Component {
        showCollapse: 'none' 
       });
   }
-
-  // handleClickPrabowo() {
-  //   if (this.state.percentPrabowo < 100 && this.state.jumlahsuara) {
-  //     this.setState({
-  //       percentPrabowo: this.state.percentPrabowo+1,
-  //       jumlahsuara: this.state.jumlahsuara-1
-  //     })
-  //   }
-  // }
-
-  // handleClickReset() {
-  //   this.setState({
-  //     percentJokowi: 0,
-  //     percentPrabowo: 0,
-  //     jumlahsuara: 400
-  //   })
-  // }
 
   render() {
     return (
@@ -111,22 +90,7 @@ class App extends Component {
           <br/>
           <Button onClick={this.toggle.bind(this)} style={{display: this.state.showCollapse}} >Mulai Vote</Button>
           <RenderPaslon paslon={this.state.paslon}/>
-          
-          
-          {/* Jokowi & Ma'ruf Amin
-          <PercentVote progress={this.state.percentJokowi / 400 * 100} />
-          <br/>
-          <Button onClick={this.handleClickJokowi.bind(this)}>Vote Jokowi</Button>
-          <br/>
-          Prabowo & Sandiaga
-          <PercentVote progress={this.state.percentPrabowo / 400 * 100} />
-          <br/>
-          <Button onClick={this.handleClickPrabowo.bind(this)}>Vote Prabowo</Button>
-          <br/>*/}
-          
-          {/* <Button onClick={this.handleClickReset.bind(this)} color="danger">Reset</Button>  */}
         </header>
-        
       </div>
     );
   }
