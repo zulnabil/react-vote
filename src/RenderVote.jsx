@@ -4,16 +4,16 @@ import PercentVote from './PercentVote';
 
 class RenderVote extends React.Component {
     render() {
-        const { paslon } = this.props;
+        const { candidate } = this.props;
         return (
             <div>
-                {paslon.map((paslon,index) => {
+                {candidate.map((candidate,index) => {
                     return (
                         <div key={index}>
-                            {paslon.presiden} & {paslon.wapres}
-                            <PercentVote progress={paslon.vote / 200 * 100}/>
+                            {candidate.president} & {candidate.copresident}
+                            <PercentVote progress={candidate.vote / 200 * 100}/>
                             <br/>
-                            <Button onClick={this.props.votePaslon} id={index}>Vote {paslon.presiden} & {paslon.wapres}</Button>
+                            <Button onClick={this.props.voteCandidate} id={index}>Vote {candidate.president} & {candidate.copresident}</Button>
                             <br/>
                             <br/>
                         </div>

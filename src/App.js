@@ -2,48 +2,48 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Button, Collapse, CardBody, Card } from 'reactstrap';
-import InputPaslon from './inputPaslon';
+import InputCandidate from './inputPaslon';
 import RenderVote from './RenderVote';
-import RenderPaslon from './RenderPaslon';
+import RenderCandidate from './RenderPaslon';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      paslon : [
+      candidate: [
         {
-          presiden: 'Jokowi',
-          wapres: 'Ma\'ruf Amin',
+          president: 'Jokowi',
+          copresident: 'Ma\'ruf Amin',
           img: 'http://cdn2.tstatic.net/wow/foto/bank/images/foto-jokowi-maruf-yang-akan-dipasang-di-kertas-suara.jpg',
           vote: 0,
           percent: 0
         },
         {
-          presiden: 'Prabowo',
-          wapres: 'Sandiaga',
+          president: 'Prabowo',
+          copresident: 'Sandiaga',
           img: 'https://harianmerdeka.com/wp-content/uploads/2018/08/Fungsionaris-Gerindra-Nilai-Sandiaga-Tepat-Dampingi-Prabowo.jpg',
           vote: 0,
           percent: 0
         },
         {
-          presiden: 'Nurhadi',
-          wapres: 'Aldo',
+          president: 'Nurhadi',
+          copresident: 'Aldo',
           img: 'http://cdn2.tstatic.net/aceh/foto/bank/images/nurhadi-dan-aldo.jpg',
           vote: 0,
           percent: 0
         },
       ],
-      jumlahsuara: 200,
+      quotavote: 200,
       collapse: false,
       showCollapse: 'flex',
     }
   }
 
-  addPaslon(presiden, wapres, img) {
-    this.setState(({ paslon }) => ({
-      paslon: paslon.concat({
-        presiden: presiden,
-        wapres: wapres,
+  addCandidate(president, copresident, img) {
+    this.setState(({ candidate }) => ({
+      candidate: candidate.concat({
+        president: president,
+        copresident: copresident,
         img: img,
         vote: 0,
         percent: 0
@@ -51,15 +51,15 @@ class App extends Component {
     }))
   }
 
-  votePaslon(paslon) {
-    if (this.state.paslon[paslon.target.id].percent < 100 && this.state.jumlahsuara)  {
-        let indexpaslon = paslon.target.id;
-        const newPaslon = this.state.paslon.slice();
-        newPaslon[indexpaslon].vote += 1;
-        newPaslon[indexpaslon].percent = newPaslon[indexpaslon].vote / 200 * 100;
+  voteCandidate(candidate) {
+    if (this.state.candidate[candidate.target.id].percent < 100 && this.state.quotavote)  {
+        let index = candidate.target.id;
+        const newCandidate = this.state.candidate.slice();
+        newCandidate[index].vote += 1;
+        newCandidate[index].percent = newCandidate[index].vote / 200 * 100;
         this.setState({
-          paslon: newPaslon,
-          jumlahsuara: this.state.jumlahsuara - 1
+          candidate: newCandidate,
+          quotavote: this.state.quotavote - 1
         })
       }
   }
@@ -68,7 +68,7 @@ class App extends Component {
     this.setState({
        collapse: !this.state.collapse,
        showCollapse: 'none' 
-      });
+      })
   }
 
   render() {
@@ -79,17 +79,17 @@ class App extends Component {
           <Collapse isOpen={this.state.collapse}>
             <Card>
               <CardBody className="FormVote">
-              <RenderVote paslon={this.state.paslon} votePaslon={this.votePaslon.bind(this)}/>
-              <p>Jumlah Suara tersisa : {this.state.jumlahsuara}</p>
+              <RenderVote candidate={this.state.candidate} voteCandidate={this.voteCandidate.bind(this)}/>
+              <p>Jumlah Suara tersisa : {this.state.quotavote}</p>
               </CardBody>
             </Card>
           </Collapse>
           <div style={{display: this.state.showCollapse}}>
-            <InputPaslon addPaslon={this.addPaslon.bind(this)}/>
+            <InputCandidate addCandidate={this.addCandidate.bind(this)}/>
           </div>
           <br/>
           <Button onClick={this.toggle.bind(this)} style={{display: this.state.showCollapse}} >Mulai Vote</Button>
-          <RenderPaslon paslon={this.state.paslon}/>
+          <RenderCandidate candidate={this.state.candidate}/>
         </header>
       </div>
     );

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 
-class InputPaslon extends React.Component {
+class InputCandidate extends React.Component {
     constructor(props) {
         super(props);
-        this.presidenInput = React.createRef();
-        this.wapresInput = React.createRef();
+        this.presidentInput = React.createRef();
+        this.copresidentInput = React.createRef();
         this.imgInput = React.createRef();
     }
 
     handleClick(e) {
         e.preventDefault()
-        this.props.addPaslon(this.presidenInput.current.value, this.wapresInput.current.value, this.imgInput.current.value);
+        this.props.addCandidate(this.presidentInput.current.value, this.copresidentInput.current.value, this.imgInput.current.value);
         this.myForm.reset()
     }
 
@@ -20,12 +20,12 @@ class InputPaslon extends React.Component {
             <form ref={myform => this.myForm = myform}>
                 <InputGroup>
                     <InputGroupAddon addonType="prepend">@</InputGroupAddon>
-                    <Input innerRef={this.presidenInput} placeholder="Nama Presiden" />
+                    <Input innerRef={this.presidentInput} placeholder="Nama Presiden" />
                 </InputGroup>
                 <br />
                 <InputGroup>
                     <InputGroupAddon addonType="prepend">@</InputGroupAddon>
-                    <Input innerRef={this.wapresInput} placeholder="Nama Wapres" />
+                    <Input innerRef={this.copresidentInput} placeholder="Nama Wapres" />
                 </InputGroup>
                 <br />
                 <InputGroup>
@@ -41,4 +41,4 @@ class InputPaslon extends React.Component {
     }
 }
 
-export default InputPaslon;
+export default InputCandidate;
